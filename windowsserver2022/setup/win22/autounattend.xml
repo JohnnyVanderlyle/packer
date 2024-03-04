@@ -15,29 +15,37 @@
                 <Disk wcm:action="add">
                     <CreatePartitions>
                         <CreatePartition wcm:action="add">
-                            <Size>250</Size>
+                            <Type>EFI</Type>
+                            <Size>512</Size>
                             <Order>1</Order>
-                            <Type>Primary</Type>
                         </CreatePartition>
                         <CreatePartition wcm:action="add">
+                            <Extend>false</Extend>
+                            <Type>MSR</Type>
                             <Order>2</Order>
-                            <Extend>true</Extend>
+                            <Size>128</Size>
+                        </CreatePartition>
+                        <CreatePartition wcm:action="add">
+                            <Order>3</Order>
                             <Type>Primary</Type>
+                            <Extend>true</Extend>
                         </CreatePartition>
                     </CreatePartitions>
                     <ModifyPartitions>
                         <ModifyPartition wcm:action="add">
+                            <Format>FAT32</Format>
                             <Order>1</Order>
                             <PartitionID>1</PartitionID>
-                            <Format>NTFS</Format>
-                            <Label>Boot</Label>
-                            <Active>true</Active>
                         </ModifyPartition>
                         <ModifyPartition wcm:action="add">
                             <Order>2</Order>
                             <PartitionID>2</PartitionID>
+                        </ModifyPartition>
+                        <ModifyPartition wcm:action="add">
                             <Format>NTFS</Format>
-                            <Label>System</Label>
+                            <Label>Windows</Label>
+                            <Order>3</Order>
+                            <PartitionID>3</PartitionID>
                         </ModifyPartition>
                     </ModifyPartitions>
                     <DiskID>0</DiskID>
@@ -49,12 +57,12 @@
                     <InstallFrom>
                         <MetaData wcm:action="add">
                             <Key>/IMAGE/NAME</Key>
-                            <Value>Windows Server 2022 SERVERDATACENTER</Value>
+                            <Value>Windows Server 2022 SERVERSTANDARD</Value>
                         </MetaData>
                     </InstallFrom>
                     <InstallTo>
                         <DiskID>0</DiskID>
-                        <PartitionID>2</PartitionID>
+                        <PartitionID>3</PartitionID>
                     </InstallTo>
                     <WillShowUI>OnError</WillShowUI>
                     <InstallToAvailablePartition>false</InstallToAvailablePartition>
@@ -64,7 +72,7 @@
 			    <AcceptEula>true</AcceptEula>
                 <ProductKey>
                     <WillShowUI>Never</WillShowUI>
-                    <Key>11111-22222-33333-44444-55555</Key>
+                    <Key>VDYBN-27WPP-V4HQT-9VMD4-VMK7H</Key>
                 </ProductKey>
             </UserData>
         </component>
@@ -106,7 +114,7 @@
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <AutoLogon>
                 <Password>
-                    <Value>Password1$</Value>
+                    <Value>secretpassword</Value>
                     <PlainText>true</PlainText>
                 </Password>
                 <LogonCount>2</LogonCount>
@@ -123,7 +131,7 @@
             </FirstLogonCommands>
             <UserAccounts>
                 <AdministratorPassword>
-                    <Value>Password1$</Value>
+                    <Value>secretpassword</Value>
                     <PlainText>true</PlainText>
                 </AdministratorPassword>
             </UserAccounts>
